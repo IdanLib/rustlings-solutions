@@ -3,13 +3,11 @@
 
 // Execute `rustlings hint generics2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 struct Wrapper<T> {
     value: T,
 }
 
-impl<T> Wrapper<T> { //double check hy <T> must be specified after impl. What does it mean for the comp exactly?
+impl<T> Wrapper<T> { //double check why <T> must be specified after impl. What does it mean for the comp exactly?
     pub fn new(value: T) -> Self {
         Wrapper { value }
     }

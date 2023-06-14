@@ -11,11 +11,17 @@
 // you can do this!
 // Execute `rustlings hint traits2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 trait AppendBar {
-    fn append_bar(self) -> Self;
+    fn append_bar(self) -> Self; //self = particular instance; Self = the type that implements the trait
 }
+
+impl AppendBar for Vec<String> {
+    fn append_bar(mut self) -> Self { // an example for method overriding in rust (arg "self" narrowed to "mut self")
+        self.push(String::from("Bar"));
+        return self;
+    }
+}
+
 
 // TODO: Implement trait `AppendBar` for a vector of strings.
 
