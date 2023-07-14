@@ -6,8 +6,6 @@
 //    list_of_results functions.
 // Execute `rustlings hint iterators3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 #[derive(Debug, PartialEq, Eq)]
 pub enum DivisionError {
     NotDivisible(NotDivisibleError),
@@ -40,7 +38,8 @@ pub fn divide(a: i32, b: i32) -> Result<i32, DivisionError> {
 fn result_with_list() -> Result<Vec<i32>, DivisionError> {
     let numbers = vec![27, 297, 38502, 81];
     return numbers.into_iter().map(|n| divide(n, 27)).collect::<Result<Vec<i32>, DivisionError>>();
-    // return numbers.iter().map(|&n| divide(n, 27)).collect::<Result<Vec<i32>, DivisionError>>(); //same as above line
+    // return numbers.iter().map(|&n| divide(n, 27)).collect::<Result<Vec<i32>, DivisionError>>(); 
+    //same as above line except uses immutable borrows instead of (cloned) ownerships
 }
 
 // Complete the function and return a value of the correct type so the test passes.
