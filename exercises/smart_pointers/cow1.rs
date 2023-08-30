@@ -8,8 +8,6 @@
 // This exercise is meant to show you what to expect when passing data to Cow.
 // Fix the unit tests by checking for Cow::Owned(_) and Cow::Borrowed(_) at the TODO markers.
 
-// I AM NOT DONE
-
 use std::borrow::Cow;
 
 fn abs_all<'a, 'b>(input: &'a mut Cow<'b, [i32]>) -> &'a mut Cow<'b, [i32]> {
@@ -30,10 +28,10 @@ mod tests {
     #[test]
     fn reference_mutation() -> Result<(), &'static str> {
         // Clone occurs because `input` needs to be mutated.
-        let slice = [-1, 0, 1];
-        let mut input = Cow::from(&slice[..]);
+        let slice = [-1, 0, 1]; // Data needs mutation 
+        let mut input = Cow::from(&slice[..]); // Passing a borrowed reference
         match abs_all(&mut input) {
-            Cow::Owned(_) => Ok(()),
+            Cow::Owned(_) => Ok(()), // Cow cloned and owned because data had to be mutated
             _ => Err("Expected owned value"),
         }
     }
@@ -41,10 +39,11 @@ mod tests {
     #[test]
     fn reference_no_mutation() -> Result<(), &'static str> {
         // No clone occurs because `input` doesn't need to be mutated.
-        let slice = [0, 1, 2];
-        let mut input = Cow::from(&slice[..]);
-        match abs_all(&mut input) {
-            // TODO
+        let slice = [0, 1, 2]; // Data doesn't need mutation
+        let mut input = Cow::from(&slice[..]); //
+        match abs_all(&mut input) { // Passing a borrowed reference
+            Cow::Borrowed(_) => Ok(()), // Cow did not clone and own, its wrapped data is still borrowed
+            _ => Err("Expected 'input' to be borrowed, since no mutation occured that necessitated ownership.")
         }
     }
 
@@ -54,10 +53,11 @@ mod tests {
         // In this case no mutation occurs and thus also no clone,
         // but the result is still owned because it was never borrowed
         // or mutated.
-        let slice = vec![0, 1, 2];
-        let mut input = Cow::from(slice);
+        let slice = vec![0, 1, 2]; // Data doesn't require mutation
+        let mut input = Cow::from(slice); // slice is owned directly 
         match abs_all(&mut input) {
-            // TODO
+            Cow::Owned(_) => Ok(()),
+            _ => Err("It's not owned")
         }
     }
 
@@ -66,10 +66,11 @@ mod tests {
         // Of course this is also the case if a mutation does occur.
         // In this case the call to `to_mut()` returns a reference to
         // the same data as before.
-        let slice = vec![-1, 0, 1];
-        let mut input = Cow::from(slice);
+        let slice = vec![-1, 0, 1]; // Data does require mutation
+        let mut input = Cow::from(slice); // slice is owned directly 
         match abs_all(&mut input) {
-            // TODO
+            Cow::Owned(_) => Ok(()),
+            _ => Err("It's not owned")
         }
     }
 }
