@@ -1,8 +1,6 @@
 // clippy3.rs
 // Here's a couple more easy Clippy fixes, so you can see its utility.
 
-// I AM NOT DONE
-
 #[allow(unused_variables, unused_assignments)]
 fn main() {
     let my_option: Option<()> = None;
@@ -26,7 +24,7 @@ fn main() {
     // value_b = value_a;
 
     // Clippy suggestion 1 - using swap()
-    // std::mem::swap(&mut value_a, &mut value_b);
+    std::mem::swap(&mut value_a, &mut value_b);
     // Clippy suggestion 2 - using replace()
     value_b = std::mem::replace(&mut value_a, value_b);
 
