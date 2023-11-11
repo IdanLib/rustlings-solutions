@@ -13,7 +13,7 @@ The traits are the following:
 
 Furthermore, the `std::str` module offers a trait called [`FromStr`](https://doc.rust-lang.org/std/str/trait.FromStr.html) which helps with converting strings into target types via the `parse` method on strings. If properly implemented for a given type `Person`, then `let p: Person = "Mark,20".parse().unwrap()` should both compile and run without panicking.
 
-These should be the main ways ***within the standard library*** to convert data into your desired types.
+These should be the main ways **_within the standard library_** to convert data into your desired types.
 
 ## Further information
 
